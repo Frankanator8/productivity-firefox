@@ -13,6 +13,7 @@ const bEl = document.getElementById("b");
 const answerEl = document.getElementById("answer");
 const progressEl = document.getElementById("progress");
 const feedbackEl = document.getElementById("feedback");
+const timeListEl = document.getElementById("time-list");
 
 let state = { unblockedUntil: 0 };
 let countdownTimer = null;
@@ -129,9 +130,43 @@ for (const btn of document.querySelectorAll(".durations button")) {
   });
 }
 
+function formatDuration(ms) {
+  const totalMin = Math.floor(ms / 60000);
+  if (totalMin < 1) return "<1m";
+  const h = Math.floor(totalMin / 60);
+  const m = totalMin % 60;
+  return h > 0 ? `${h}h ${m}m` : `${m}m`;
+}
+
+function escapeHtml(s) {
+  return s.replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+  }[c]));
+}
+
+async function loadTimeStats() {
+  const stats = await browser.runtime.sendMessage({ type: "getTimeStats" });
+  const entries = Object.entries(stats?.domains || {})
+    .filter(([, ms]) => ms > 0)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 6);
+  if (entries.length === 0) {
+    timeListEl.innerHTML = '<li class="muted">No activity yet.</li>';
+    return;
+  }
+  timeListEl.innerHTML = entries
+    .map(
+      ([domain, ms]) =>
+        `<li><span class="domain">${escapeHtml(domain)}</span><span class="ms">${formatDuration(ms)}</span></li>`
+    )
+    .join("");
+}
+
 (async function init() {
   const res = await browser.runtime.sendMessage({ type: "getState" });
   state.unblockedUntil = res?.unblockedUntil || 0;
   render();
   startCountdown();
+  loadTimeStats();
+  setInterval(loadTimeStats, 5000);
 })();

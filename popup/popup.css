@@ -62,3 +62,39 @@ button.secondary { background: transparent; }
   margin-top: 8px;
 }
 .durations button { margin: 0; }
+#time-stats {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid #2a2a2e;
+}
+#time-stats h2 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #aaa;
+  margin: 0 0 8px;
+  font-weight: 600;
+}
+#time-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#time-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0;
+  font-size: 12px;
+  color: #ddd;
+  font-variant-numeric: tabular-nums;
+}
+#time-list li.muted {
+  color: #777;
+  justify-content: flex-start;
+}
+#time-list li .domain {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 180px;
+}
