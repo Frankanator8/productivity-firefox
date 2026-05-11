@@ -1,0 +1,17 @@
+/* Static rules — keyed off attributes Reddit emits. */
+
+html:not(.productivity-unblocked) [data-productivity="hide"],
+html:not(.productivity-unblocked) shreddit-post[recommendation-source],
+html:not(.productivity-unblocked) [data-testid="post-recommendation"],
+html:not(.productivity-unblocked) shreddit-ad-post,
+html:not(.productivity-unblocked) [data-testid="trending-today"],
+html:not(.productivity-unblocked) [data-testid="reddit-recommended-communities"] {
+  display: none !important;
+}
+
+/* Subreddit listings (incl. /r/popular, /r/all) — hide the entire feed. */
+html:not(.productivity-unblocked).productivity-page-listing shreddit-feed,
+html:not(.productivity-unblocked).productivity-page-listing [data-testid="posts-list"],
+html:not(.productivity-unblocked).productivity-page-listing faceplate-batch {
+  display: none !important;
+}

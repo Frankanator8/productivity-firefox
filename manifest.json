@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "productivity — hide Instagram & Reddit recommendations",
+  "version": "0.1.0",
+  "description": "Hides recommendation surfaces on Instagram and Reddit. Unblocking requires solving 10 two-digit additions and lasts up to 15 minutes.",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "productivity@local"
+    }
+  },
+  "permissions": ["storage", "tabs"],
+  "host_permissions": [
+    "*://*.instagram.com/*",
+    "*://*.reddit.com/*"
+  ],
+  "icons": {
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg",
+    "128": "icons/icon.svg"
+  },
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "action": {
+    "default_title": "productivity",
+    "default_popup": "popup/popup.html",
+    "default_icon": "icons/icon.svg"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.instagram.com/*"],
+      "css": ["content/instagram.css"],
+      "js": ["content/instagram.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://*.reddit.com/*"],
+      "css": ["content/reddit.css"],
+      "js": ["content/reddit.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

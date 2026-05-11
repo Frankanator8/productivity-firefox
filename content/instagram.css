@@ -1,0 +1,12 @@
+/* Hide rules apply only when the unblock class is absent on <html>. */
+
+/* Items tagged by the observer (suggested feed posts, suggested user lists). */
+html:not(.productivity-unblocked) [data-productivity="hide"] {
+  display: none !important;
+}
+
+/* /explore/* and /reels/* — main content is pure recommendations. */
+html:not(.productivity-unblocked).productivity-page-explore main[role="main"] > div,
+html:not(.productivity-unblocked).productivity-page-reels main[role="main"] > div {
+  display: none !important;
+}

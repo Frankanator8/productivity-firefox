@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <h1>productivity</h1>
+        <div id="status" class="status">…</div>
+      </header>
+
+      <section id="locked-view" hidden>
+        <p class="muted">
+          Recommendations are blocked on Instagram and Reddit.
+        </p>
+        <button id="start-unblock" class="primary">Unblock…</button>
+      </section>
+
+      <section id="unblocked-view" hidden>
+        <p>Unblocked. Time left: <span id="time-left">--:--</span></p>
+        <button id="lock-now" class="primary">Lock now</button>
+      </section>
+
+      <section id="gauntlet-view" hidden>
+        <p>
+          Solve <span id="progress">1</span> / 10 — two-digit additions to
+          unblock.
+        </p>
+        <div class="problem">
+          <span id="a">--</span> + <span id="b">--</span> =
+          <input
+            id="answer"
+            type="number"
+            inputmode="numeric"
+            autocomplete="off"
+          />
+        </div>
+        <div id="feedback" class="feedback"></div>
+        <button id="cancel-gauntlet" class="secondary">Cancel</button>
+      </section>
+
+      <section id="duration-view" hidden>
+        <p>How long should recommendations be unblocked?</p>
+        <div class="durations">
+          <button data-min="1">1 min</button>
+          <button data-min="5">5 min</button>
+          <button data-min="10">10 min</button>
+          <button data-min="15">15 min</button>
+        </div>
+      </section>
+
+    </div>
+    <script src="popup.js"></script>
+  </body>
+</html>
